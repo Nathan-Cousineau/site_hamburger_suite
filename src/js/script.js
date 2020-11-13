@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
-    //Un commentaire
-    console.log("Ça fonctionne!!!");
+    //Cet un Objet
     var informations = [
         {
             id: "pizza",
@@ -31,5 +30,35 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     ]
 
+    console.log(new URLSearchParams(window.location.search));
 
+    var type = new URLSearchParams(window.location.search).get('type') || "pizza";
+    var infoPage = informations.find( x => x.id === type);
+    console.log(infoPage);
+
+    var title = document.querySelector('.main-title');
+    title.innerHTML = infoPage.title;
+
+    var slogan = document.querySelector('.sub-title');
+    slogan.innerHTML = infoPage.slogan;
+
+    var desc = document.querySelector('.sub-description p');
+    desc.innerHTML = infoPage.description;
+
+    var list = document.querySelector('.type-list');
+    list.innerHTML = "";
+
+    for(var i = 0; i < infoPage.type.length; i++){
+        var li = document.createElement("li");
+        li.innerHTML = infoPage.type[i];
+        console.log(li);
+
+        list.appendChild(li);
+    }
+
+    var image = document.querySelector('.sub-image img');
+    image.src = infoPage.image;
+
+    //var gallery = document.querySelectorAll('.thumb img');
+    //gallery.src = infoPage.gallery;
 });
